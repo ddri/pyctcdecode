@@ -479,6 +479,17 @@ class TestDecoder(unittest.TestCase):
         self.assertEqual(beams[0][0], "bugs bunny")
         self.assertEqual(beams[1][0], "bunny bunny")
 
+    def test_trailing_word_delimiter_lm_score(self):
+        # the same text must get the same LM score whether or not the logits end with a space
+        decoder = build_ctcdecoder(SAMPLE_LABELS, KENLM_MODEL_PATH, alpha=0.5, beta=1.5)
+        ends_with_letter = np.vstack([BUGS_PROBS, SPACE_PROBS, BUNNY_PROBS])
+        ends_with_space = np.vstack([BUGS_PROBS, SPACE_PROBS, BUNNY_PROBS, SPACE_PROBS])
+        for probs in (ends_with_letter, ends_with_space):
+            beam = decoder.decode_beams(np.log(np.clip(probs, 1e-15, 1)))[0]
+            self.assertEqual(beam[0], "bugs bunny")
+            # log10 P(bugs | <s>) = P(bunny | bugs) = P(</s> | bunny) = 0, so only beta per word
+            self.assertAlmostEqual(beam[-1] - beam[-2], 2 * 1.5)
+
     def test_frame_annotation(self):
         # build a basic decoder with LM to get all possible combinations
         decoder = build_ctcdecoder(SAMPLE_LABELS)
