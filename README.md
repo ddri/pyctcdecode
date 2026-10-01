@@ -1,3 +1,8 @@
+> **Fork note.** This fork carries fixes for [#120](https://github.com/kensho-technologies/pyctcdecode/issues/120) and [#122](https://github.com/kensho-technologies/pyctcdecode/issues/122) pending upstream review.
+> See [CHANGELOG.md](CHANGELOG.md). Install with
+> `pip install git+https://github.com/ddri/pyctcdecode@v0.5.0-fix1`
+> Upstream: [kensho-technologies/pyctcdecode](https://github.com/kensho-technologies/pyctcdecode).
+
   <a href="https://github.com/kensho-technologies/pyctcdecode/actions?query=workflow%3A%22Tests+and+lint%22"><img src="https://github.com/kensho-technologies/pyctcdecode/workflows/Tests%20and%20lint/badge.svg" /></a>
   <a href="https://codecov.io/gh/kensho-technologies/pyctcdecode"><img src="https://codecov.io/gh/kensho-technologies/pyctcdecode/branch/main/graph/badge.svg" /></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
